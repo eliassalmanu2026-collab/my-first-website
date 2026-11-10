@@ -129,8 +129,8 @@ return [
         'label'  => 'Новости',
         'single' => 'новость',
         'order'  => 'id DESC',
-        'list'   => ['id', 'title', 'slug', 'published_at'],
-        'fk'     => [],
+        'list'   => ['id', 'title', 'slug', 'author_id', 'published_at'],
+        'fk'     => ['author_id' => ['users', 'name']],
         'types'  => [
             'body'         => 'textarea',
             'excerpt'      => 'textarea',
@@ -145,8 +145,8 @@ return [
         'label'  => 'Сообщения',
         'single' => 'сообщение',
         'order'  => 'is_read ASC, id DESC',
-        'list'   => ['id', 'name', 'email', 'subject', 'is_read', 'created_at'],
-        'fk'     => [],
+        'list'   => ['id', 'name', 'email', 'subject', 'user_id', 'is_read', 'created_at'],
+        'fk'     => ['user_id' => ['users', 'name']],
         'types'  => [
             'body'      => 'textarea',
             'is_read'   => 'bool',

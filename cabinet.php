@@ -114,7 +114,7 @@ require __DIR__ . '/inc/header.php';
 </nav>
 
 <?php if ($tab === 'profile'): ?>
-    <div class="panel" style="max-width:620px">
+    <div class="panel" style="max-width:620px;margin:0 auto">
         <h2>Данные профиля</h2>
 
         <?php if ($errors): ?>

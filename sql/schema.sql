@@ -94,10 +94,14 @@ CREATE TABLE news (
     excerpt      VARCHAR(400)          DEFAULT NULL,
     body         MEDIUMTEXT   NOT NULL,
     image        VARCHAR(255)          DEFAULT NULL,
+    author_id    INT UNSIGNED          DEFAULT NULL COMMENT 'кто опубликовал',
     published_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     UNIQUE KEY uq_news_slug (slug),
-    KEY idx_news_published (published_at)
+    KEY idx_news_published (published_at),
+    KEY idx_news_author (author_id),
+    CONSTRAINT fk_news_author FOREIGN KEY (author_id) REFERENCES users (id)
+        ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ---------------------------------------------------------------------------
@@ -198,6 +202,7 @@ CREATE TABLE reviews (
 -- ---------------------------------------------------------------------------
 CREATE TABLE messages (
     id         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    user_id    INT UNSIGNED          DEFAULT NULL COMMENT 'если писал зарегистрированный пользователь',
     name       VARCHAR(100) NOT NULL,
     email      VARCHAR(150) NOT NULL,
     phone      VARCHAR(20)           DEFAULT NULL,
@@ -206,7 +211,10 @@ CREATE TABLE messages (
     is_read    TINYINT (1)  NOT NULL DEFAULT 0,
     created_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    KEY idx_messages_read (is_read)
+    KEY idx_messages_read (is_read),
+    KEY idx_messages_user (user_id),
+    CONSTRAINT fk_messages_user FOREIGN KEY (user_id) REFERENCES users (id)
+        ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ---------------------------------------------------------------------------

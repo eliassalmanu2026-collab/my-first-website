@@ -38,9 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$errors) {
-        db_value('INSERT INTO messages (name, email, phone, subject, body, created_at)
-                  VALUES (?, ?, ?, ?, ?, ?)',
-            [$old['name'], $old['email'], $old['phone'] ?: null, $old['subject'], $old['body'], date('Y-m-d H:i:s')]);
+        $currentUser = current_user();
+        db_value('INSERT INTO messages (user_id, name, email, phone, subject, body, created_at)
+                  VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [$currentUser['id'] ?? null, $old['name'], $old['email'], $old['phone'] ?: null,
+             $old['subject'], $old['body'], date('Y-m-d H:i:s')]);
 
         flash('success', 'Спасибо! Сообщение отправлено — администратор увидит его в панели.');
         redirect('contacts.php');

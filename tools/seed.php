@@ -66,7 +66,7 @@ foreach ($users as [$role, $name, $email, $phone, $pass, $created]) {
 }
 
 /* ---------------------------------------------------------------- новости */
-$insNews = $pdo->prepare('INSERT INTO news (title, slug, excerpt, body, image, published_at) VALUES (?, ?, ?, ?, ?, ?)');
+$insNews = $pdo->prepare('INSERT INTO news (title, slug, excerpt, body, image, author_id, published_at) VALUES (?, ?, ?, ?, ?, 1, ?)');
 $news = [
     ['Мы открылись: 35 проверенных рецептов', 'my-otkrylis',
      'Собрали лучшие домашние рецепты со всего мира и добавили к каждому пошаговую инструкцию.',
@@ -519,14 +519,14 @@ foreach ($reviewTexts as $i => [$uid, $idx, $rating, $text]) {
 }
 
 /* ------------------------------------------------------------- сообщения */
-$insMsg = $pdo->prepare('INSERT INTO messages (name, email, phone, subject, body, is_read, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
-$insMsg->execute(['Ольга', 'olga@mail.ru', '+7 (900) 444-55-66', 'Просьба добавить рецепты без мяса',
+$insMsg = $pdo->prepare('INSERT INTO messages (user_id, name, email, phone, subject, body, is_read, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+$insMsg->execute([null, 'Ольга', 'olga@mail.ru', '+7 (900) 444-55-66', 'Просьба добавить рецепты без мяса',
     'Здравствуйте! Очень нравится сайт. Не планируете добавить раздел с вегетарианскими рецептами?',
     0, '2026-11-07 10:15:00']);
-$insMsg->execute(['Дмитрий', 'dmitry@mail.ru', '+7 (900) 555-66-77', 'Ошибка в рецепте',
+$insMsg->execute([3, 'Иван Петров', 'ivan@mail.ru', '+7 (900) 222-33-44', 'Ошибка в рецепте',
     'В рецепте «Тарт Татен» указано 6 яблок, а у меня поместилось только 4. Поправьте, пожалуйста.',
     0, '2026-11-08 16:40:00']);
-$insMsg->execute(['Светлана', 'sveta@mail.ru', null, 'Сотрудничество',
+$insMsg->execute([2, 'Анна Смирнова', 'anna@mail.ru', null, 'Сотрудничество',
     'Предлагаем разместить ваши рецепты у нас с обратной ссылкой. Жду ответа.',
     1, '2026-11-03 09:05:00']);
 
