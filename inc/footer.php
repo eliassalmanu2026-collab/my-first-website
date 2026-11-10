@@ -9,7 +9,7 @@
     <div class="container footer-grid">
         <div>
             <a class="logo logo-footer" href="<?= url('index.php') ?>">
-                <img src="<?= asset('img/logo.svg') ?>" alt="" width="38" height="38">
+                <img src="<?= asset('img/logo.png') ?>" alt="" width="38" height="38">
                 <strong><?= e(SITE_NAME) ?></strong>
             </a>
             <p class="footer-note">

@@ -24,14 +24,14 @@ $here = current_page();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($pageTitle ? $pageTitle . ' — ' . SITE_NAME : SITE_NAME . ' — ' . SITE_TAGLINE) ?></title>
     <meta name="description" content="<?= e(SITE_TAGLINE) ?>">
-    <link rel="icon" href="<?= asset('img/logo.svg') ?>" type="image/svg+xml">
+    <link rel="icon" href="<?= asset('img/logo.png') ?>" type="image/png">
     <link rel="stylesheet" href="<?= asset('css/style.css') ?>">
 </head>
 <body>
 <header class="site-header">
     <div class="container header-inner">
         <a class="logo" href="<?= url('index.php') ?>">
-            <img src="<?= asset('img/logo.svg') ?>" alt="" width="44" height="44">
+            <img src="<?= asset('img/logo.png') ?>" alt="" width="44" height="44">
             <span class="logo-text">
                 <strong><?= e(SITE_NAME) ?></strong>
                 <small>рецепты со всего мира</small>
